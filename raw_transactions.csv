@@ -1,0 +1,11 @@
+txn_id,account_id,customer_id,amount,txn_type,txn_date,status,city
+T001,ACC001,C001,1500.00,credit,2024-01-05,completed,New York
+T002,ACC002,C002,200.50,debit,2024-01-07,completed,Chicago
+T003,ACC001,C001,3200.00,credit,2024-01-10,completed,New York
+T004,ACC003,C003,450.75,debit,2024-02-01,completed,Houston
+T005,ACC002,C002,120.00,debit,2024-02-14,pending,Chicago
+T006,ACC004,C004,5000.00,credit,2024-02-20,completed,Phoenix
+T007,ACC003,C003,89.99,debit,2024-03-05,completed,Houston
+T008,ACC001,C001,2300.00,credit,2024-03-15,completed,New York
+T009,ACC005,C005,670.00,debit,2024-03-22,failed,Dallas
+T010,ACC004,C004,1100.00,credit,2024-04-01,completed,Phoenix

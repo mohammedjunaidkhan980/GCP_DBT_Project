@@ -1,0 +1,61 @@
+version: 2
+
+sources:
+  - name: raw
+    database: # here your GCP project id  (e.g. my-gcp-project-123)
+    schema: raw
+    tables:
+      - name: transactions
+        description: "Raw transactions table loaded from GCS into BigQuery"
+
+models:
+  - name: stg_transactions
+    description: "Cleaned and renamed raw finance transactions"
+    columns:
+      - name: txn_id
+        description: "Unique transaction identifier"
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: amount
+        tests:
+          - not_null
+      - name: txn_type
+        tests:
+          - accepted_values:
+              values: ['credit', 'debit']
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['completed', 'pending', 'failed']
+
+  - name: int_transactions
+    description: "Enriched transactions with time dimensions and amount category"
+    columns:
+      - name: txn_id
+        tests:
+          - unique
+          - not_null
+      - name: amount_category
+        tests:
+          - accepted_values:
+              values: ['high', 'medium', 'low']
+
+  - name: fct_transactions
+    description: "Final aggregated credit, debit and net balance per customer per month"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+      - name: net_balance
+        tests:
+          - not_null
+      - name: total_transactions
+        tests:
+          - not_null
